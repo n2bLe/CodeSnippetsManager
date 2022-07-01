@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="524.0" prefWidth="804.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.nobble.codesnippets.SnippetController">
+   <children>
+      <ListView fx:id="typesList" layoutX="57.0" onMouseClicked="#onTypeSelect" prefHeight="524.0" prefWidth="131.0" />
+      <ListView fx:id="namesList" layoutX="188.0" onMouseClicked="#showCode" prefHeight="524.0" prefWidth="170.0" />
+      <TextArea fx:id="codeArea" layoutX="375.0" layoutY="304.0" prefHeight="206.0" prefWidth="415.0" />
+      <TextField fx:id="searchBar" layoutX="573.0" layoutY="14.0" promptText="Search" />
+      <Button layoutX="732.0" layoutY="14.0" mnemonicParsing="false" onAction="#search" text="Search" />
+      <Button fx:id="addBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAddWindow" prefHeight="25.0" prefWidth="34.0" style="-fx-border-radius: 25;" text="+" textAlignment="CENTER" />
+   </children>
+</AnchorPane>
