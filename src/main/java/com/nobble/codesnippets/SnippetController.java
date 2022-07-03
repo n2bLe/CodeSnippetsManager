@@ -10,6 +10,9 @@ import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.w3c.dom.events.MouseEvent;
+import java.awt.datatransfer.StringSelection;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,19 +59,19 @@ public class SnippetController implements Initializable {
     @FXML
     private TextArea codeArea;
     @FXML
-    private ListView typesList = new ListView();
+    private ListView typesList;
     @FXML
-    private ListView namesList = new ListView();
+    private ListView namesList;
     private final String url = "jdbc:mysql://localhost:3306/codesnips";
     private final String username = "root";
     private final String password = "bullet";
-    private final String select_query = "SELECT * FROM snips";
-    private final String insert_query = "INSERT INTO snips (lang, type, name, code) VALUES (?,?,?,?)";
+    private final String SELECT_QUERY = "SELECT * FROM snips";
+    private final String INSERT_QUERY = "INSERT INTO snips (lang, type, name, code) VALUES (?,?,?,?)";
 
     public void connectToInsert(String lang,String type,String name,String code){
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
-            PreparedStatement preparedStatement = connection.prepareStatement(insert_query);
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY);
             preparedStatement.setString(1,lang);
             preparedStatement.setString(2,type);
             preparedStatement.setString(3,name);
@@ -104,7 +107,7 @@ public class SnippetController implements Initializable {
     }
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        connectToGet(url,username,password,select_query);
+        connectToGet(url,username,password,SELECT_QUERY);
         typesList.getSelectionModel().selectFirst();
         typesList.getItems().addAll(types);
     }
@@ -157,7 +160,7 @@ public class SnippetController implements Initializable {
     public void showAddWindow(ActionEvent event){
         try {
 
-            Parent root = FXMLLoader.load(getClass().getResource("/secondWindow.fxml"));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/secondWindow.fxml")));
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setTitle("Add snippet");
@@ -232,7 +235,12 @@ public class SnippetController implements Initializable {
         }
 
     }
+    public void copy(ActionEvent event){
+        String code = codeArea.getText();
+        StringSelection stringSelection = new StringSelection(code);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection,null);
 
-    //Todo: fix the search
+    }
     //Todo: optimize the code
 }

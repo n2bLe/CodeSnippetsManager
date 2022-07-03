@@ -4,6 +4,8 @@ module com.nobble.codesnippets {
 
     requires org.kordamp.bootstrapfx.core;
     requires java.sql;
+    requires java.datatransfer;
+    requires java.desktop;
     exports com.nobble.codesnippets;
     opens com.nobble.codesnippets to javafx.fxml;
 }

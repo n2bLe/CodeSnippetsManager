@@ -13,6 +13,7 @@ public class SnippetApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SnippetApplication.class.getResource("codeSnippets.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        scene.getStylesheets().add("style.css");
         stage.setTitle("Code Snippets");
         stage.setScene(scene);
         stage.show();
